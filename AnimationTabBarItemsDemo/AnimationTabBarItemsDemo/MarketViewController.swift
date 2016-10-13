@@ -14,7 +14,7 @@ class MarketViewController: BaseViewController {
         super.viewDidLoad()
         self.navigationItem.title = "超市"
         
-        view.backgroundColor = UIColor.yellowColor()
+        view.backgroundColor = UIColor.yellow
         // Do any additional setup after loading the view.
     }
 

@@ -13,7 +13,7 @@ class ShopViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.orangeColor()
+        view.backgroundColor = UIColor.orange
         self.navigationItem.title = "商店"
         // Do any additional setup after loading the view.
     }

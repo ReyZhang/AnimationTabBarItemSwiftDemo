@@ -10,17 +10,17 @@ import UIKit
 
 class GuideViewController: BaseViewController {
     
-    private var collectionView:UICollectionView?
-    private var imageNames = ["guide_40_1", "guide_40_2", "guide_40_3", "guide_40_4"]
-    private let cellIdentifier = "GuideCell"
-    private var isHiddenNextButton = true
-    private var pageController = UIPageControl(frame: CGRectMake(0, ScreenHeight - 50, ScreenWidth, 20))
+    fileprivate var collectionView:UICollectionView?
+    fileprivate var imageNames = ["guide_40_1", "guide_40_2", "guide_40_3", "guide_40_4"]
+    fileprivate let cellIdentifier = "GuideCell"
+    fileprivate var isHiddenNextButton = true
+    fileprivate var pageController = UIPageControl(frame: CGRect(x: 0, y: ScreenHeight - 50, width: ScreenWidth, height: 20))
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
+        UIApplication.shared.setStatusBarHidden(false, with: .none)
         createCollectionView()
         createPageControll()
         // Do any additional setup after loading the view.
@@ -34,20 +34,20 @@ class GuideViewController: BaseViewController {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.itemSize = ScreenBounds.size
-        layout.scrollDirection = .Horizontal
+        layout.scrollDirection = .horizontal
         
         collectionView = UICollectionView(frame: ScreenBounds, collectionViewLayout: layout)
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.showsVerticalScrollIndicator = false
-        collectionView?.pagingEnabled = true
+        collectionView?.isPagingEnabled = true
         collectionView?.bounces = false
-        collectionView?.registerClass(GuideCollectionViewCell.self , forCellWithReuseIdentifier: cellIdentifier)
+        collectionView?.register(GuideCollectionViewCell.self , forCellWithReuseIdentifier: cellIdentifier)
         view.addSubview(collectionView!)
     }
     
-    private func createPageControll() {
+    fileprivate func createPageControll() {
         pageController.numberOfPages = imageNames.count
         pageController.currentPage = 0
         view.addSubview(pageController)
@@ -61,33 +61,33 @@ class GuideViewController: BaseViewController {
 
 extension GuideViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageNames.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! GuideCollectionViewCell
-        cell.newImage = UIImage(named: imageNames[indexPath.row])
-        if indexPath.row != imageNames.count - 1 {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! GuideCollectionViewCell
+        cell.newImage = UIImage(named: imageNames[(indexPath as NSIndexPath).row])
+        if (indexPath as NSIndexPath).row != imageNames.count - 1 {
             cell.setNextBtnHidden(true)
         }
         return cell
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         if scrollView.contentOffset.x == ScreenWidth * CGFloat(imageNames.count - 1) {
-            let cell = collectionView?.cellForItemAtIndexPath(NSIndexPath(forRow: imageNames.count - 1, inSection: 0)) as! GuideCollectionViewCell
+            let cell = collectionView?.cellForItem(at: IndexPath(row: imageNames.count - 1, section: 0)) as! GuideCollectionViewCell
             cell.setNextBtnHidden(false)
             isHiddenNextButton = false
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView.contentOffset.x != ScreenWidth * CGFloat(imageNames.count - 1) && !isHiddenNextButton && scrollView.contentOffset.x > ScreenWidth * CGFloat(imageNames.count - 2) {
-            let cell = collectionView?.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: NSIndexPath(forRow: imageNames.count - 1, inSection: 0)) as! GuideCollectionViewCell
+            let cell = collectionView?.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: IndexPath(row: imageNames.count - 1, section: 0)) as! GuideCollectionViewCell
             cell.setNextBtnHidden(true)
             isHiddenNextButton = true
         }

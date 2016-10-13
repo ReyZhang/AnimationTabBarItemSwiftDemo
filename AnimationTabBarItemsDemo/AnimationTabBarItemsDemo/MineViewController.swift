@@ -13,7 +13,7 @@ class MineViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.greenColor()
+        view.backgroundColor = UIColor.green
         self.navigationItem.title = "我的"
         // Do any additional setup after loading the view.
     }

@@ -11,8 +11,8 @@ import UIKit
 class GuideCollectionViewCell: UICollectionViewCell {
     
     
-    private let newImageView = UIImageView(frame: ScreenBounds)
-    private let nextBtn = UIButton(frame: CGRectMake((ScreenWidth - 100)*0.5, ScreenHeight - 110, 100, 33))
+    fileprivate let newImageView = UIImageView(frame: ScreenBounds)
+    fileprivate let nextBtn = UIButton(frame: CGRect(x: (ScreenWidth - 100)*0.5, y: ScreenHeight - 110, width: 100, height: 33))
     
     var newImage:UIImage? {
         didSet{
@@ -22,12 +22,12 @@ class GuideCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        newImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        newImageView.contentMode = UIViewContentMode.scaleAspectFill
         contentView.addSubview(newImageView)
         
-        nextBtn.setBackgroundImage(UIImage(named: "icon_next"), forState: .Normal)
-        nextBtn.addTarget(self, action: "nextBtnClick", forControlEvents: .TouchUpInside)
-        nextBtn.hidden = true
+        nextBtn.setBackgroundImage(UIImage(named: "icon_next"), for: UIControlState())
+        nextBtn.addTarget(self, action: #selector(GuideCollectionViewCell.nextBtnClick), for: .touchUpInside)
+        nextBtn.isHidden = true
         contentView.addSubview(nextBtn)
     }
 
@@ -35,12 +35,12 @@ class GuideCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setNextBtnHidden(hidden:Bool) {
-        nextBtn.hidden = hidden
+    func setNextBtnHidden(_ hidden:Bool) {
+        nextBtn.isHidden = hidden
     }
     
     func nextBtnClick() {
-        NSNotificationCenter.defaultCenter().postNotificationName(GuideViewControllerDidFinish, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: GuideViewControllerDidFinish), object: nil)
     }
     
 }

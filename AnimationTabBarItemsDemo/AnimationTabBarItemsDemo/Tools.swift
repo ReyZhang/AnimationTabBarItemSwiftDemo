@@ -10,16 +10,16 @@ import UIKit
 
 //MARK:-UIColor
 extension UIColor {
-    class func colorWithCustom(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor {
+    class func colorWithCustom(_ r:CGFloat, g:CGFloat, b:CGFloat)->UIColor {
         return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1)
     }
 }
 public let LGJGlobalBackgroundColor = UIColor.colorWithCustom(239, g: 239, b: 239)
 
 //MARK:-FRAME
-public let ScreenWidth:CGFloat = UIScreen.mainScreen().bounds.size.width
-public let ScreenHeight:CGFloat = UIScreen.mainScreen().bounds.size.height
-public let ScreenBounds:CGRect = UIScreen.mainScreen().bounds
+public let ScreenWidth:CGFloat = UIScreen.main.bounds.size.width
+public let ScreenHeight:CGFloat = UIScreen.main.bounds.size.height
+public let ScreenBounds:CGRect = UIScreen.main.bounds
 
 extension UIView {
     

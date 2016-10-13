@@ -13,7 +13,7 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.redColor()
+        view.backgroundColor = UIColor.red
         self.navigationItem.title = "首页"
         // Do any additional setup after loading the view.
     }
